@@ -1,3 +1,75 @@
 # terraform-provider-tomswallapi
 
-Terraform provider for tomswallapi: manage fleet-global firewall policy (zones, address groups, portgroups, rules, policies, fabrics) and per-device bindings.
+Terraform/OpenTofu provider for [tomswallapi](https://git.unkin.net/unkin/tomswallapi),
+the fleet control plane for tomswall. Declare the fleet-global firewall model —
+zones, address groups, portgroups, rules, and fabrics — plus per-device
+zone→interface bindings, as HCL.
+
+## Provider configuration
+
+```hcl
+terraform {
+  required_providers {
+    tomswallapi = {
+      source = "git.unkin.net/unkin/tomswallapi"
+    }
+  }
+}
+
+provider "tomswallapi" {
+  endpoint = "https://tomswallapi.k8s.syd1.au.unkin.net"
+  # token defaults to the TOMSWALLAPI_WRITE_TOKEN environment variable
+}
+```
+
+## Resources
+
+| resource | key | notes |
+|---|---|---|
+| `tomswallapi_zone` | name | fleet-global segment; `subnets` may be empty for edge zones |
+| `tomswallapi_address_group` | name | `type` = static/dns/asn; asn `resolved`/`resolved_at` are computed |
+| `tomswallapi_portgroup` | name | reusable proto+ports |
+| `tomswallapi_fabric` | name | `enforce_on_routers` toggles defense-in-depth |
+| `tomswallapi_device` | name | `class` = router/firewall, `fabric`, `resolver`, `settings` |
+| `tomswallapi_binding` | device:zone | zone→interface map (import as `device:zone`) |
+| `tomswallapi_rule` | id | shorewall-style `source`/`dest` element lists |
+
+## Example
+
+See [`examples/`](examples/). A minimal A→cloudflare rule:
+
+```hcl
+resource "tomswallapi_zone" "loc" { name = "loc" subnets = ["10.1.0.0/24"] }
+resource "tomswallapi_zone" "net" { name = "net" }  # edge zone, no subnets
+
+resource "tomswallapi_address_group" "cloudflare" {
+  name    = "cloudflare"
+  type    = "asn"
+  members = ["13335"]
+  refresh = "24h"
+}
+
+resource "tomswallapi_rule" "cf_https" {
+  action = "accept"
+  source = ["loc"]
+  dest   = ["net:+asn_cloudflare"]
+  proto  = "tcp"
+  ports  = ["443"]
+}
+```
+
+## Development
+
+```sh
+make build     # build the provider binary
+make install   # install into ~/.terraform.d/plugins for local testing
+make test      # go test
+make lint      # go vet
+```
+
+## Releases
+
+`make patch|minor|major` tags and pushes the next `v*`, which triggers the
+Woodpecker release pipeline to package the provider and publish it to the
+artifactapi terraform registry (`terraform-unkin`), installable via the bare
+`source = "git.unkin.net/unkin/tomswallapi"` address.
