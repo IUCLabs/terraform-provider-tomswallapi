@@ -75,6 +75,9 @@ func (p *tomswallProvider) Resources(_ context.Context) []func() resource.Resour
 		NewDeviceResource,
 		NewBindingResource,
 		NewRuleResource,
+		NewSNATResource,
+		NewNetmapResource,
+		NewNATResource,
 	}
 }
 

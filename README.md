@@ -33,6 +33,9 @@ provider "tomswallapi" {
 | `tomswallapi_device` | name | `class` = router/firewall, `fabric`, `resolver`, `settings` |
 | `tomswallapi_binding` | device:zone | zone→interface map (import as `device:zone`) |
 | `tomswallapi_rule` | id | shorewall-style `source`/`dest` element lists |
+| `tomswallapi_snat` | id | masquerade/SNAT; `source` zone-or-CIDR, `egress` zone |
+| `tomswallapi_netmap` | id | net-to-net map, anchored `device:zone`\|`device:interface` |
+| `tomswallapi_nat` | id | 1:1 static NAT bound to a `device` |
 
 ## Example
 

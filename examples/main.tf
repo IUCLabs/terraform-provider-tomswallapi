@@ -88,3 +88,29 @@ resource "tomswallapi_rule" "a_to_cloudflare" {
   dest      = ["net:+asn_cloudflare"]
   portgroup = tomswallapi_portgroup.https.name
 }
+
+# --- NAT tier ---------------------------------------------------------------
+
+# Masquerade zone-a out the internet edge. Renders on devices binding both
+# zone-a and net (i.e. edge firewalls), on their net-facing interface.
+resource "tomswallapi_snat" "masq_zone_a" {
+  action = "masquerade"
+  source = tomswallapi_zone.zone_a.name
+  egress = tomswallapi_zone.net.name
+}
+
+# 1:1 static NAT of a public IP to an internal host, on fw-a.
+resource "tomswallapi_nat" "web" {
+  device    = tomswallapi_device.fw_a.name
+  external  = "203.0.113.10"
+  internal  = "10.1.0.10"
+  interface = "eth0"
+}
+
+# Network-to-network map anchored at fw-a's net interface.
+resource "tomswallapi_netmap" "remap" {
+  type     = "dnat"
+  from_net = "10.0.0.0/24"
+  to_net   = "192.168.1.0/24"
+  anchor   = "${tomswallapi_device.fw_a.name}:${tomswallapi_zone.net.name}"
+}
