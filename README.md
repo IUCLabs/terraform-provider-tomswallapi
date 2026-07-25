@@ -36,6 +36,9 @@ provider "tomswallapi" {
 | `tomswallapi_snat` | id | masquerade/SNAT; `source` zone-or-CIDR, `egress` zone |
 | `tomswallapi_netmap` | id | net-to-net map, anchored `device:zone`\|`device:interface` |
 | `tomswallapi_nat` | id | 1:1 static NAT bound to a `device` |
+| `tomswallapi_policy` | id | default zone-to-zone posture (`priority` ordered) |
+| `tomswallapi_blrule` | id | blacklist/whitelist rule (pre-rules) |
+| `tomswallapi_conntrack` | id | connection-tracking control (notrack/helper) |
 
 ## Example
 
