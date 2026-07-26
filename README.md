@@ -51,6 +51,8 @@ provider "tomswallapi" {
 | `tomswallapi_mangle` | id | packet-mangling rule on a `device` |
 | `tomswallapi_accounting` | id | traffic-accounting rule on a `device` |
 | `tomswallapi_tc_device` / `_tc_class` / `_tc_filter` / `_tc_interface` / `_tc_priority` | id | traffic-shaping on a `device` |
+| `tomswallapi_secmark` | id | SELinux security-marking rule |
+| `tomswallapi_var` | key | global substitution variable (key/value) |
 
 ## Example
 
