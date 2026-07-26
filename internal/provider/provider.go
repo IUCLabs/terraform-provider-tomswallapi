@@ -85,6 +85,12 @@ func (p *tomswallProvider) Resources(_ context.Context) []func() resource.Resour
 		NewProviderResource,
 		NewRouteResource,
 		NewRoutingRuleResource,
+		NewTunnelResource,
+		NewStoppedRuleResource,
+		NewProxyARPResource,
+		NewProxyNDPResource,
+		NewArpRuleResource,
+		NewMaclistResource,
 	}
 }
 

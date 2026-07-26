@@ -43,6 +43,11 @@ provider "tomswallapi" {
 | `tomswallapi_provider` | id | multi-ISP routing provider on a `device` |
 | `tomswallapi_route` | id | static route on a `device` (`oif` = egress iface) |
 | `tomswallapi_routing_rule` | id | policy routing to a provider table (rtrules) |
+| `tomswallapi_tunnel` | id | VPN tunnel definition on a `device` |
+| `tomswallapi_stopped_rule` | id | traffic allowed while the firewall is stopped |
+| `tomswallapi_proxy_arp` / `_proxy_ndp` | id | proxy ARP/NDP on a `device` |
+| `tomswallapi_arp_rule` | id | ARP-level rule on a `device` |
+| `tomswallapi_maclist` | id | MAC/IP verification on a `device` interface |
 
 ## Example
 
