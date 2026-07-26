@@ -98,6 +98,8 @@ func (p *tomswallProvider) Resources(_ context.Context) []func() resource.Resour
 		NewTCFilterResource,
 		NewTCInterfaceResource,
 		NewTCPriorityResource,
+		NewSecmarkResource,
+		NewVarResource,
 	}
 }
 
