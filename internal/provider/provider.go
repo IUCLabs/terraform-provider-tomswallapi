@@ -81,6 +81,10 @@ func (p *tomswallProvider) Resources(_ context.Context) []func() resource.Resour
 		NewPolicyResource,
 		NewBlruleResource,
 		NewConntrackResource,
+		NewHostResource,
+		NewProviderResource,
+		NewRouteResource,
+		NewRoutingRuleResource,
 	}
 }
 

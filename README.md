@@ -39,6 +39,10 @@ provider "tomswallapi" {
 | `tomswallapi_policy` | id | default zone-to-zone posture (`priority` ordered) |
 | `tomswallapi_blrule` | id | blacklist/whitelist rule (pre-rules) |
 | `tomswallapi_conntrack` | id | connection-tracking control (notrack/helper) |
+| `tomswallapi_host` | id | zone→address constraint on a `device` interface |
+| `tomswallapi_provider` | id | multi-ISP routing provider on a `device` |
+| `tomswallapi_route` | id | static route on a `device` (`oif` = egress iface) |
+| `tomswallapi_routing_rule` | id | policy routing to a provider table (rtrules) |
 
 ## Example
 
