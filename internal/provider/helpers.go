@@ -45,6 +45,24 @@ func stringsToList(ctx context.Context, s []string, diags *diag.Diagnostics) typ
 	return l
 }
 
+// optionalInt64 maps an omitempty API int back to state, preserving a prior null
+// when the API returns the zero value.
+func optionalInt64(apiVal int, prior types.Int64) types.Int64 {
+	if apiVal != 0 {
+		return types.Int64Value(int64(apiVal))
+	}
+	return prior
+}
+
+// optionalList maps an API string slice back to state for an optional list
+// attribute, preserving a null value the user left unset when the API returns none.
+func optionalList(ctx context.Context, apiVals []string, prior types.List, diags *diag.Diagnostics) types.List {
+	if prior.IsNull() && len(apiVals) == 0 {
+		return types.ListNull(types.StringType)
+	}
+	return stringsToList(ctx, apiVals, diags)
+}
+
 // mapToStrings converts a Terraform map into a map[string]string.
 func mapToStrings(ctx context.Context, m types.Map, diags *diag.Diagnostics) map[string]string {
 	if m.IsNull() || m.IsUnknown() {

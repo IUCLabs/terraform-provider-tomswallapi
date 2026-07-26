@@ -36,6 +36,21 @@ provider "tomswallapi" {
 | `tomswallapi_snat` | id | masquerade/SNAT; `source` zone-or-CIDR, `egress` zone |
 | `tomswallapi_netmap` | id | net-to-net map, anchored `device:zone`\|`device:interface` |
 | `tomswallapi_nat` | id | 1:1 static NAT bound to a `device` |
+| `tomswallapi_policy` | id | default zone-to-zone posture (`priority` ordered) |
+| `tomswallapi_blrule` | id | blacklist/whitelist rule (pre-rules) |
+| `tomswallapi_conntrack` | id | connection-tracking control (notrack/helper) |
+| `tomswallapi_host` | id | zone→address constraint on a `device` interface |
+| `tomswallapi_provider` | id | multi-ISP routing provider on a `device` |
+| `tomswallapi_route` | id | static route on a `device` (`oif` = egress iface) |
+| `tomswallapi_routing_rule` | id | policy routing to a provider table (rtrules) |
+| `tomswallapi_tunnel` | id | VPN tunnel definition on a `device` |
+| `tomswallapi_stopped_rule` | id | traffic allowed while the firewall is stopped |
+| `tomswallapi_proxy_arp` / `_proxy_ndp` | id | proxy ARP/NDP on a `device` |
+| `tomswallapi_arp_rule` | id | ARP-level rule on a `device` |
+| `tomswallapi_maclist` | id | MAC/IP verification on a `device` interface |
+| `tomswallapi_mangle` | id | packet-mangling rule on a `device` |
+| `tomswallapi_accounting` | id | traffic-accounting rule on a `device` |
+| `tomswallapi_tc_device` / `_tc_class` / `_tc_filter` / `_tc_interface` / `_tc_priority` | id | traffic-shaping on a `device` |
 
 ## Example
 
