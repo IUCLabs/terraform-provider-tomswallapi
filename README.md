@@ -48,6 +48,9 @@ provider "tomswallapi" {
 | `tomswallapi_proxy_arp` / `_proxy_ndp` | id | proxy ARP/NDP on a `device` |
 | `tomswallapi_arp_rule` | id | ARP-level rule on a `device` |
 | `tomswallapi_maclist` | id | MAC/IP verification on a `device` interface |
+| `tomswallapi_mangle` | id | packet-mangling rule on a `device` |
+| `tomswallapi_accounting` | id | traffic-accounting rule on a `device` |
+| `tomswallapi_tc_device` / `_tc_class` / `_tc_filter` / `_tc_interface` / `_tc_priority` | id | traffic-shaping on a `device` |
 
 ## Example
 
