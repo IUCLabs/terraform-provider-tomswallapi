@@ -34,10 +34,10 @@ func (p *tomswallProvider) Metadata(_ context.Context, _ provider.MetadataReques
 
 func (p *tomswallProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description: "Manage the tomswall fleet control plane: fleet-global zones, address groups, portgroups, rules, policies, and fabrics, plus per-device zone->interface bindings.",
+		Description: "Manage a tomswallapi firewall control plane: fleet-global zones, address groups, portgroups, rules, policies, and fabrics, plus per-device zone->interface bindings.",
 		Attributes: map[string]schema.Attribute{
 			"endpoint": schema.StringAttribute{
-				Description: "The tomswallapi base URL (e.g. https://tomswallapi.k8s.syd1.au.unkin.net).",
+				Description: "The tomswallapi base URL (e.g. https://tomswallapi.example.com).",
 				Required:    true,
 			},
 			"token": schema.StringAttribute{

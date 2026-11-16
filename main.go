@@ -1,5 +1,5 @@
 // Command terraform-provider-tomswallapi is the Terraform/OpenTofu provider for
-// tomswallapi: it manages the fleet-global firewall model (zones, address groups,
+// the tomswallapi service: it manages the fleet-global firewall model (zones, address groups,
 // portgroups, rules, policies, fabrics) and per-device zone->interface bindings.
 package main
 
@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 
-	"git.unkin.net/unkin/terraform-provider-tomswallapi/internal/provider"
+	"github.com/IUCLabs/terraform-provider-tomswallapi/internal/provider"
 )
 
 var version = "0.0.1"
@@ -21,7 +21,7 @@ func main() {
 	flag.Parse()
 
 	opts := providerserver.ServeOpts{
-		Address: "git.unkin.net/unkin/tomswallapi",
+		Address: "registry.terraform.io/iuclabs/tomswallapi",
 		Debug:   debug,
 	}
 
