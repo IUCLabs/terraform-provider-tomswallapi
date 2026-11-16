@@ -26,7 +26,7 @@ type routingRuleModel struct {
 	Device     types.String `tfsdk:"device"`
 	Source     types.String `tfsdk:"source"`
 	Dest       types.String `tfsdk:"dest"`
-	Provider   types.String `tfsdk:"provider"`
+	Provider   types.String `tfsdk:"routing_provider"`
 	Priority   types.Int64  `tfsdk:"priority"`
 	Persistent types.Bool   `tfsdk:"persistent"`
 	Mark       types.String `tfsdk:"mark"`
@@ -55,15 +55,15 @@ func (r *routingRuleResource) Schema(_ context.Context, _ resource.SchemaRequest
 	resp.Schema = schema.Schema{
 		Description: "Directs traffic to a provider's routing table on a device (rtrules).",
 		Attributes: map[string]schema.Attribute{
-			"id":         schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
-			"device":     schema.StringAttribute{Description: "Owning device.", Required: true},
-			"source":     schema.StringAttribute{Optional: true},
-			"dest":       schema.StringAttribute{Optional: true},
-			"provider":   schema.StringAttribute{Required: true},
-			"priority":   schema.Int64Attribute{Optional: true, Computed: true, Default: int64default.StaticInt64(0)},
-			"persistent": schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
-			"mark":       schema.StringAttribute{Optional: true},
-			"comment":    schema.StringAttribute{Optional: true},
+			"id":               schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
+			"device":           schema.StringAttribute{Description: "Owning device.", Required: true},
+			"source":           schema.StringAttribute{Description: "Source address, network, or interface to match.", Optional: true},
+			"dest":             schema.StringAttribute{Description: "Destination address or network to match.", Optional: true},
+			"routing_provider": schema.StringAttribute{Description: "Provider whose routing table matching traffic uses.", Required: true},
+			"priority":         schema.Int64Attribute{Description: "Routing rule priority; lower first.", Optional: true, Computed: true, Default: int64default.StaticInt64(0)},
+			"persistent":       schema.BoolAttribute{Description: "Keep the entry in place while the firewall is stopped.", Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
+			"mark":             schema.StringAttribute{Description: "Firewall mark to match.", Optional: true},
+			"comment":          schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

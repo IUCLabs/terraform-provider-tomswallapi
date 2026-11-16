@@ -23,7 +23,7 @@ type routeResource struct{ client *apiClient }
 type routeModel struct {
 	ID         types.Int64  `tfsdk:"id"`
 	Device     types.String `tfsdk:"device"`
-	Provider   types.String `tfsdk:"provider"`
+	Provider   types.String `tfsdk:"routing_provider"`
 	Dest       types.String `tfsdk:"dest"`
 	Gateway    types.String `tfsdk:"gateway"`
 	Oif        types.String `tfsdk:"oif"`
@@ -52,14 +52,14 @@ func (r *routeResource) Schema(_ context.Context, _ resource.SchemaRequest, resp
 	resp.Schema = schema.Schema{
 		Description: "A static route on a device. `oif` is the egress interface.",
 		Attributes: map[string]schema.Attribute{
-			"id":         schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
-			"device":     schema.StringAttribute{Description: "Owning device.", Required: true},
-			"provider":   schema.StringAttribute{Optional: true},
-			"dest":       schema.StringAttribute{Required: true},
-			"gateway":    schema.StringAttribute{Optional: true},
-			"oif":        schema.StringAttribute{Description: "Egress interface.", Optional: true},
-			"persistent": schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
-			"comment":    schema.StringAttribute{Optional: true},
+			"id":               schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
+			"device":           schema.StringAttribute{Description: "Owning device.", Required: true},
+			"routing_provider": schema.StringAttribute{Description: "Provider whose routing table receives the route; omit for the main table.", Optional: true},
+			"dest":             schema.StringAttribute{Description: "Destination network.", Required: true},
+			"gateway":          schema.StringAttribute{Description: "Next-hop gateway address.", Optional: true},
+			"oif":              schema.StringAttribute{Description: "Egress interface.", Optional: true},
+			"persistent":       schema.BoolAttribute{Description: "Keep the entry in place while the firewall is stopped.", Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
+			"comment":          schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }
