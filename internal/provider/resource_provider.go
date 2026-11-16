@@ -56,13 +56,13 @@ func (r *providerResource) Schema(_ context.Context, _ resource.SchemaRequest, r
 		Attributes: map[string]schema.Attribute{
 			"id":        schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":    schema.StringAttribute{Description: "Owning device.", Required: true},
-			"name":      schema.StringAttribute{Required: true},
+			"name":      schema.StringAttribute{Description: "Provider name.", Required: true},
 			"number":    schema.Int64Attribute{Description: "Provider routing table number.", Required: true},
-			"mark":      schema.Int64Attribute{Optional: true},
-			"duplicate": schema.StringAttribute{Optional: true},
-			"interface": schema.StringAttribute{Required: true},
-			"gateway":   schema.StringAttribute{Optional: true},
-			"copy":      schema.ListAttribute{Optional: true, ElementType: types.StringType},
+			"mark":      schema.Int64Attribute{Description: "Firewall mark that routes traffic through this provider.", Optional: true},
+			"duplicate": schema.StringAttribute{Description: "Routing table copied into the provider's table (e.g. main).", Optional: true},
+			"interface": schema.StringAttribute{Description: "Interface the provider is reached through.", Required: true},
+			"gateway":   schema.StringAttribute{Description: "Gateway address, or detect.", Optional: true},
+			"copy":      schema.ListAttribute{Description: "Interfaces whose routes are copied into the provider's table.", Optional: true, ElementType: types.StringType},
 		},
 	}
 }

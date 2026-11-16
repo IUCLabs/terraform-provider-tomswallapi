@@ -43,7 +43,7 @@ func (r *varResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *
 				Required:      true,
 				PlanModifiers: []planmodifier.String{stringplanmodifier.RequiresReplace()},
 			},
-			"value": schema.StringAttribute{Required: true},
+			"value": schema.StringAttribute{Description: "Variable value.", Required: true},
 		},
 	}
 }

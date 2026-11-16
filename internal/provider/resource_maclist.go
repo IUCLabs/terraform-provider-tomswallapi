@@ -55,11 +55,11 @@ func (r *maclistResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 			"id":        schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":    schema.StringAttribute{Description: "Owning device.", Required: true},
 			"action":    schema.StringAttribute{Description: "accept, drop, ...", Required: true},
-			"interface": schema.StringAttribute{Required: true},
-			"mac":       schema.StringAttribute{Optional: true},
-			"addresses": schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"log":       schema.StringAttribute{Optional: true},
-			"comment":   schema.StringAttribute{Optional: true},
+			"interface": schema.StringAttribute{Description: "Interface the MAC address is verified on.", Required: true},
+			"mac":       schema.StringAttribute{Description: "MAC address to verify.", Optional: true},
+			"addresses": schema.ListAttribute{Description: "IP addresses permitted for the MAC address.", Optional: true, ElementType: types.StringType},
+			"log":       schema.StringAttribute{Description: "Log level for matching packets (e.g. info).", Optional: true},
+			"comment":   schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

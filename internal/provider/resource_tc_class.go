@@ -54,11 +54,11 @@ func (r *tcClassResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 			"id":        schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":    schema.StringAttribute{Description: "Owning device.", Required: true},
 			"interface": schema.StringAttribute{Description: "iface:class or iface:parent:class.", Required: true},
-			"mark":      schema.Int64Attribute{Optional: true},
-			"rate":      schema.StringAttribute{Optional: true},
-			"ceil":      schema.StringAttribute{Optional: true},
-			"priority":  schema.Int64Attribute{Optional: true},
-			"comment":   schema.StringAttribute{Optional: true},
+			"mark":      schema.Int64Attribute{Description: "Firewall mark that classifies traffic into this class.", Optional: true},
+			"rate":      schema.StringAttribute{Description: "Guaranteed rate (e.g. 10mbit).", Optional: true},
+			"ceil":      schema.StringAttribute{Description: "Maximum rate (e.g. 100mbit, or full).", Optional: true},
+			"priority":  schema.Int64Attribute{Description: "Class priority; lower first.", Optional: true},
+			"comment":   schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

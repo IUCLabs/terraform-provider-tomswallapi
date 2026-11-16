@@ -95,8 +95,8 @@ func (r *ruleResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 				Optional:    true,
 				ElementType: types.StringType,
 			},
-			"log":     schema.StringAttribute{Optional: true},
-			"comment": schema.StringAttribute{Optional: true},
+			"log":     schema.StringAttribute{Description: "Log level for matching packets (e.g. info).", Optional: true},
+			"comment": schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

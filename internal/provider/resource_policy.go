@@ -61,7 +61,7 @@ func (r *policyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 			"source": schema.StringAttribute{Description: "Source zone (or all).", Required: true},
 			"dest":   schema.StringAttribute{Description: "Dest zone (or all).", Required: true},
 			"action": schema.StringAttribute{Description: "accept, drop, reject, continue, none, ...", Required: true},
-			"log":    schema.StringAttribute{Optional: true},
+			"log":    schema.StringAttribute{Description: "Log level for matching packets (e.g. info).", Optional: true},
 		},
 	}
 }

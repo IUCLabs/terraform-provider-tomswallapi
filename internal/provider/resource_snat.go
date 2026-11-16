@@ -74,7 +74,7 @@ func (r *snatResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 				Description: "Match probability (0-1) for load-balanced SNAT.",
 				Optional:    true,
 			},
-			"comment": schema.StringAttribute{Optional: true},
+			"comment": schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

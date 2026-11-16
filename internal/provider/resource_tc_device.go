@@ -49,10 +49,10 @@ func (r *tcDeviceResource) Schema(_ context.Context, _ resource.SchemaRequest, r
 		Attributes: map[string]schema.Attribute{
 			"id":            schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":        schema.StringAttribute{Description: "Owning device.", Required: true},
-			"interface":     schema.StringAttribute{Required: true},
-			"in_bandwidth":  schema.StringAttribute{Optional: true},
-			"out_bandwidth": schema.StringAttribute{Optional: true},
-			"comment":       schema.StringAttribute{Optional: true},
+			"interface":     schema.StringAttribute{Description: "Interface to shape.", Required: true},
+			"in_bandwidth":  schema.StringAttribute{Description: "Ingress bandwidth limit (e.g. 100mbit).", Optional: true},
+			"out_bandwidth": schema.StringAttribute{Description: "Egress bandwidth (e.g. 100mbit).", Optional: true},
+			"comment":       schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

@@ -53,11 +53,11 @@ func (r *hostResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 		Attributes: map[string]schema.Attribute{
 			"id":         schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":     schema.StringAttribute{Description: "Owning device.", Required: true},
-			"zone":       schema.StringAttribute{Required: true},
-			"interface":  schema.StringAttribute{Required: true},
-			"addresses":  schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"exclusions": schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"dynamic":    schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
+			"zone":       schema.StringAttribute{Description: "Zone the addresses belong to.", Required: true},
+			"interface":  schema.StringAttribute{Description: "Device interface the addresses are reached through.", Required: true},
+			"addresses":  schema.ListAttribute{Description: "Addresses or networks on the interface that belong to the zone.", Optional: true, ElementType: types.StringType},
+			"exclusions": schema.ListAttribute{Description: "Addresses excluded from the zone.", Optional: true, ElementType: types.StringType},
+			"dynamic":    schema.BoolAttribute{Description: "Make zone membership dynamic so hosts can be added at runtime.", Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
 		},
 	}
 }

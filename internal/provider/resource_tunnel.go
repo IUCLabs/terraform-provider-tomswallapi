@@ -55,11 +55,11 @@ func (r *tunnelResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 			"id":            schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":        schema.StringAttribute{Description: "Owning device.", Required: true},
 			"type":          schema.StringAttribute{Description: "Tunnel type (ipsec, openvpn:udp, ...).", Required: true},
-			"zone":          schema.StringAttribute{Required: true},
-			"gateways":      schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"gateway_zones": schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"port":          schema.Int64Attribute{Optional: true},
-			"comment":       schema.StringAttribute{Optional: true},
+			"zone":          schema.StringAttribute{Description: "Zone the remote tunnel endpoint is in.", Required: true},
+			"gateways":      schema.ListAttribute{Description: "Remote gateway addresses.", Optional: true, ElementType: types.StringType},
+			"gateway_zones": schema.ListAttribute{Description: "Zones the remote gateway may be in.", Optional: true, ElementType: types.StringType},
+			"port":          schema.Int64Attribute{Description: "Port the tunnel uses, overriding the type default.", Optional: true},
+			"comment":       schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

@@ -65,12 +65,12 @@ func (r *proxyResource) Schema(_ context.Context, _ resource.SchemaRequest, resp
 		Attributes: map[string]schema.Attribute{
 			"id":         schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":     schema.StringAttribute{Description: "Owning device.", Required: true},
-			"address":    schema.StringAttribute{Required: true},
-			"interface":  schema.StringAttribute{Optional: true},
+			"address":    schema.StringAttribute{Description: "Address to answer for.", Required: true},
+			"interface":  schema.StringAttribute{Description: "Interface the address is reachable through.", Optional: true},
 			"external":   schema.StringAttribute{Description: "External interface.", Required: true},
-			"haveroute":  schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
-			"persistent": schema.BoolAttribute{Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
-			"comment":    schema.StringAttribute{Optional: true},
+			"haveroute":  schema.BoolAttribute{Description: "A route to the address already exists, so none is added.", Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
+			"persistent": schema.BoolAttribute{Description: "Keep the entry in place while the firewall is stopped.", Optional: true, Computed: true, Default: booldefault.StaticBool(false)},
+			"comment":    schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }
