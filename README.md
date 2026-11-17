@@ -10,6 +10,8 @@ See the [provider documentation](docs/index.md) for all resources and arguments.
 
 ## Quick Start
 
+Prebuilt provider archives are on the [releases page](https://github.com/IUCLabs/terraform-provider-tomswallapi/releases).
+
 ```hcl
 terraform {
   required_providers {
