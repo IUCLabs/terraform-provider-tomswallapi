@@ -68,7 +68,7 @@ func (r *netmapResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				Description: "Anchor as device:zone or device:interface.",
 				Required:    true,
 			},
-			"comment": schema.StringAttribute{Optional: true},
+			"comment": schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

@@ -57,12 +57,12 @@ func (r *stoppedRuleResource) Schema(_ context.Context, _ resource.SchemaRequest
 			"id":      schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":  schema.StringAttribute{Description: "Owning device.", Required: true},
 			"action":  schema.StringAttribute{Description: "accept, drop, ...", Required: true},
-			"source":  schema.StringAttribute{Optional: true},
-			"dest":    schema.StringAttribute{Optional: true},
-			"proto":   schema.StringAttribute{Optional: true},
-			"dport":   schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"sport":   schema.ListAttribute{Optional: true, ElementType: types.StringType},
-			"comment": schema.StringAttribute{Optional: true},
+			"source":  schema.StringAttribute{Description: "Source to match (zone, interface, or address in shorewall notation).", Optional: true},
+			"dest":    schema.StringAttribute{Description: "Destination to match (zone, interface, or address in shorewall notation).", Optional: true},
+			"proto":   schema.StringAttribute{Description: "Protocol to match (tcp, udp, icmp, ...).", Optional: true},
+			"dport":   schema.ListAttribute{Description: "Destination ports or port ranges to match.", Optional: true, ElementType: types.StringType},
+			"sport":   schema.ListAttribute{Description: "Source ports or port ranges to match.", Optional: true, ElementType: types.StringType},
+			"comment": schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

@@ -69,7 +69,8 @@ func (r *addressGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				Optional:    true,
 			},
 			"description": schema.StringAttribute{
-				Optional: true,
+				Description: "Free-form description.",
+				Optional:    true,
 			},
 			"resolved": schema.ListAttribute{
 				Description: "Server-managed: concrete prefixes the ASN expander last produced.",

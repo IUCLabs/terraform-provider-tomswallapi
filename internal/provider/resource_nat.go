@@ -68,7 +68,7 @@ func (r *natResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *
 				Description: "Interface that has the external address.",
 				Optional:    true,
 			},
-			"comment": schema.StringAttribute{Optional: true},
+			"comment": schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }

@@ -55,13 +55,13 @@ func (r *arpRuleResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 		Attributes: map[string]schema.Attribute{
 			"id":             schema.Int64Attribute{Computed: true, PlanModifiers: []planmodifier.Int64{int64planmodifier.UseStateForUnknown()}},
 			"device":         schema.StringAttribute{Description: "Owning device.", Required: true},
-			"action":         schema.StringAttribute{Required: true},
-			"action_address": schema.StringAttribute{Optional: true},
-			"action_mac":     schema.StringAttribute{Optional: true},
-			"source":         schema.StringAttribute{Optional: true},
-			"dest":           schema.StringAttribute{Optional: true},
-			"opcode":         schema.Int64Attribute{Optional: true},
-			"comment":        schema.StringAttribute{Optional: true},
+			"action":         schema.StringAttribute{Description: "ARP action (ACCEPT, DROP, SNAT, or DNAT).", Required: true},
+			"action_address": schema.StringAttribute{Description: "Replacement IP address for SNAT/DNAT actions.", Optional: true},
+			"action_mac":     schema.StringAttribute{Description: "Replacement MAC address for SNAT/DNAT actions.", Optional: true},
+			"source":         schema.StringAttribute{Description: "Source interface, address, or MAC to match.", Optional: true},
+			"dest":           schema.StringAttribute{Description: "Destination interface, address, or MAC to match.", Optional: true},
+			"opcode":         schema.Int64Attribute{Description: "ARP opcode to match (1 = request, 2 = reply).", Optional: true},
+			"comment":        schema.StringAttribute{Description: "Free-form comment.", Optional: true},
 		},
 	}
 }
